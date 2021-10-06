@@ -1,3 +1,21 @@
+#menu_container{
+    display: flex;
+}
+
+#menu_left{
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+}
+
+#menu_right{
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+}
+
 h1 {
     text-align: center;
 }
@@ -26,13 +44,18 @@ button.send:disabled {
 #inputURL {
     height: 20px !important;
     text-align: center;
-    text-indent: -30px; 
+    text-indent: -30px;
+    width: calc(100% - 90px) !important;
 }
 
 .search-wrapper.cf {
     height: 20px !important;
+    width: 100% !important;
 }
 
+#menu_right > div > span {
+    font-weight: bold;
+}
 
 .resizable {
 	/* Make it resizable */
@@ -42,6 +65,7 @@ button.send:disabled {
 	
 	/* To allow children to stretch */
 	display: flex;
+    border: 5px solid black;
 }
 
 .resizable > * {

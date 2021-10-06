@@ -42,24 +42,65 @@
                 let  oldIframe = document.getElementById('id_Iframe');
                 oldIframe.setAttribute('src',src);
                 oldIframe.style.webkitTransform = 'scale(1)';
+
+                let url_info = document.getElementById('url_info');
+                url_info.innerHTML = '<span>URL:</span> ' + src;
+
+                let iframe_w = document.getElementById('iframe_w');
+                iframe_w.innerHTML = '<span>LARGEUR:</span> ' + oldIframe.clientWidth;
+
+                let iframe_h = document.getElementById('iframe_h');
+                iframe_h.innerHTML = '<span>HAUTEUR:</span> ' + oldIframe.clientHeight;
             }
         </script>
     </head>
 
     <body>
 
-        <h1>Iframe Redimentionnable</h1>
+        <div id="menu_container">
 
-        <div class="search-wrapper cf">
-            <button id="btnDelete" class="delete" onclick="resetIframe();" disabled>X</button>
-            <input id="inputURL" type="text" placeholder="Url de l'iframe" required style="box-shadow: none" oninput="showBtn();">
-            <button id="btnSend" class="send" onclick="loadIframe();" disabled>Charger</button>
+            <div id="menu_left">
+                <h1>Iframe Redimentionnable</h1>
+
+                <div class="search-wrapper cf">
+                    <button id="btnDelete" class="delete" onclick="resetIframe();" disabled>X</button>
+                    <input id="inputURL" type="text" placeholder="Url de l'iframe" required style="box-shadow: none" oninput="showBtn();">
+                    <button id="btnSend" class="send" onclick="loadIframe();" disabled>Charger</button>
+                </div>
+            </div>
+
+            <div id="menu_right">
+                <div id="url_info">
+                    <span>URL:</span> about:blank
+                </div>
+                <div id="iframe_w">
+                    <span>LARGEUR:</span> NULL
+                </div>
+                <div id="iframe_h">
+                    <span>HAUTEUR:</span> NULL
+                </div>
+            </div>
         </div>
 
         <!-- iframes need a wrapper to make them resizable -->
         <div id="containerIframe" class="resizable">
-            <iframe id="id_Iframe" title="Iframe Redimentionnable" src="about:blank" sandbox="allow-same-origin allow-top-navigation allow-scripts" referrerpolicy="unsafe-url" allowpaymentrequest>Loading...</iframe>
+            <iframe onload="showStats();" id="id_Iframe" title="Iframe Redimentionnable" src="about:blank" sandbox="allow-same-origin allow-top-navigation allow-scripts" referrerpolicy="unsafe-url" allowpaymentrequest>Loading...</iframe>
         </div>
+
+
+        <script>
+            function showStats(){
+                let  oldIframe = document.getElementById('id_Iframe');
+
+                let iframe_w = document.getElementById('iframe_w');
+                iframe_w.innerHTML = '<span>LARGEUR:</span> ' + oldIframe.clientWidth;
+
+                let iframe_h = document.getElementById('iframe_h');
+                iframe_h.innerHTML = '<span>HAUTEUR:</span> ' + oldIframe.clientHeight;
+
+                setTimeout(function(){ showStats(); }, 100);
+            }
+        </script>
 
     </body>
 
