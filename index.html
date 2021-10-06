@@ -40,13 +40,8 @@
                 debugger;
                 let iframe_div = document.getElementById('containerIframe');
                 let  oldIframe = document.getElementById('id_Iframe');
-                //if(oldIframe) oldIframe.remove();
-                //const iframe = document.createElement('iframe');
-                //iframe.id = 'id_Iframe';
-                console.log(src);
                 oldIframe.setAttribute('src',src);
-                //iframe.setAttribute('src',src);
-                //iframe_div.appendChild(iframe);
+                oldIframe.style.webkitTransform = 'scale(1)';
             }
         </script>
     </head>
@@ -55,15 +50,15 @@
 
         <h1>Iframe Redimentionnable</h1>
 
-        <form class="search-wrapper cf">
+        <div class="search-wrapper cf">
             <button id="btnDelete" class="delete" onclick="resetIframe();" disabled>X</button>
             <input id="inputURL" type="text" placeholder="Url de l'iframe" required style="box-shadow: none" oninput="showBtn();">
-            <button id="btnSend" class="send" type="submit" onclick="loadIframe();" disabled>Charger</button>
-        </form>
+            <button id="btnSend" class="send" onclick="loadIframe();" disabled>Charger</button>
+        </div>
 
         <!-- iframes need a wrapper to make them resizable -->
         <div id="containerIframe" class="resizable">
-            <iframe id="id_Iframe" title="Iframe Redimentionnable" src="" />
+            <iframe id="id_Iframe" title="Iframe Redimentionnable" src="about:blank" sandbox="allow-same-origin allow-top-navigation allow-scripts" referrerpolicy="unsafe-url" allowpaymentrequest>Loading...</iframe>
         </div>
 
     </body>
