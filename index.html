@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Iframe Redimentionnable</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="index.css">
+
+        <script>
+            function showBtn() {
+                let url = document.getElementById('inputURL').value;
+                let deleteBTN = document.getElementById('btnDelete');
+                let sendBTN = document.getElementById('btnSend');
+                if( url.length > 0 ){
+                    deleteBTN.disabled = false;
+                    sendBTN.disabled = false;
+                } else {
+                    deleteBTN.disabled = true;
+                    sendBTN.disabled = true;
+                }
+            }
+
+            function resetIframe(){
+                let url = document.getElementById('inputURL');
+                url.value = '';
+                let deleteBTN = document.getElementById('btnDelete');
+                let sendBTN = document.getElementById('btnSend');
+                deleteBTN.disabled = true;
+                sendBTN.disabled = true;
+
+                createIframe('about:blank');
+            }
+
+            function loadIframe(){
+                let url = document.getElementById('inputURL').value;
+                createIframe(url);
+            }
+
+            function createIframe(src){
+                debugger;
+                let iframe_div = document.getElementById('containerIframe');
+                let  oldIframe = document.getElementById('id_Iframe');
+                //if(oldIframe) oldIframe.remove();
+                //const iframe = document.createElement('iframe');
+                //iframe.id = 'id_Iframe';
+                console.log(src);
+                oldIframe.setAttribute('src',src);
+                //iframe.setAttribute('src',src);
+                //iframe_div.appendChild(iframe);
+            }
+        </script>
+    </head>
+
+    <body>
+
+        <h1>Iframe Redimentionnable</h1>
+
+        <form class="search-wrapper cf">
+            <button id="btnDelete" class="delete" onclick="resetIframe();" disabled>X</button>
+            <input id="inputURL" type="text" placeholder="Url de l'iframe" required style="box-shadow: none" oninput="showBtn();">
+            <button id="btnSend" class="send" type="submit" onclick="loadIframe();" disabled>Charger</button>
+        </form>
+
+        <!-- iframes need a wrapper to make them resizable -->
+        <div id="containerIframe" class="resizable">
+            <iframe id="id_Iframe" title="Iframe Redimentionnable" src="" />
+        </div>
+
+    </body>
+
+</html>
