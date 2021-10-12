@@ -46,11 +46,11 @@
                 let url_info = document.getElementById('url_info');
                 url_info.innerHTML = '<span>URL:</span> ' + src;
 
-                let iframe_w = document.getElementById('iframe_w');
-                iframe_w.innerHTML = '<span>LARGEUR:</span> ' + oldIframe.clientWidth;
+                let largeur = document.getElementById('largeur');      
+                largeur.value = iframe_div.clientWidth;
 
-                let iframe_h = document.getElementById('iframe_h');
-                iframe_h.innerHTML = '<span>HAUTEUR:</span> ' + oldIframe.clientHeight;
+                let hauteur = document.getElementById('hauteur');
+                hauteur.value = iframe_div.clientHeight;
             }
         </script>
     </head>
@@ -74,31 +74,46 @@
                     <span>URL:</span> about:blank
                 </div>
                 <div id="iframe_w">
-                    <span>LARGEUR:</span> NULL
+                    <span>LARGEUR:</span>
+                    <input type="number" id="largeur" name="largeur" min="100" max="1000" onchange="setNewLargeur(this)" onkeyup="setNewLargeur(this)">
                 </div>
                 <div id="iframe_h">
-                    <span>HAUTEUR:</span> NULL
+                    <span>HAUTEUR:</span>
+                    <input type="number" id="hauteur" name="hauteur" min="100" max="1000" onchange="setNewHauteur(this)" onkeyup="setNewHauteur(this)">
                 </div>
             </div>
         </div>
 
         <!-- iframes need a wrapper to make them resizable -->
         <div id="containerIframe" class="resizable">
-            <iframe onload="showStats();" id="id_Iframe" title="Iframe Redimentionnable" src="about:blank" sandbox="allow-same-origin allow-top-navigation allow-scripts allow-forms" referrerpolicy="unsafe-url" allowpaymentrequest>Loading...</iframe>
+            <iframe id="id_Iframe" title="Iframe Redimentionnable" src="about:blank" sandbox="allow-same-origin allow-top-navigation allow-scripts allow-forms" referrerpolicy="unsafe-url" allowpaymentrequest>Loading...</iframe>
         </div>
 
 
         <script>
+
             function showStats(){
-                let  oldIframe = document.getElementById('id_Iframe');
+                var el =  document.getElementById('containerIframe');
+                debugger;
+                let largeur = document.getElementById('largeur');      
+                largeur.value = el.clientWidth;
 
-                let iframe_w = document.getElementById('iframe_w');
-                iframe_w.innerHTML = '<span>LARGEUR:</span> ' + oldIframe.clientWidth;
+                let hauteur = document.getElementById('hauteur');
+                hauteur.value = el.clientHeight;
+            }
 
-                let iframe_h = document.getElementById('iframe_h');
-                iframe_h.innerHTML = '<span>HAUTEUR:</span> ' + oldIframe.clientHeight;
+            new ResizeObserver(showStats).observe(document.getElementById('containerIframe'))
 
-                setTimeout(function(){ showStats(); }, 100);
+            function setNewLargeur(el){
+                debugger;
+                let  oldIframe = document.getElementById('containerIframe');
+                oldIframe.style.width = el.value+'px';
+            }
+
+            function setNewHauteur(el){
+                debugger;
+                let  oldIframe = document.getElementById('containerIframe');
+                oldIframe.style.height = el.value+'px';
             }
         </script>
 
